@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>   
+<title>RSS Query Get News By Topicc</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.1/dist/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="bootstrap-3.3.1/docs/examples/jumbotron/jumbotron.css" rel="stylesheet">
+    <style>
+ 
+ #grad {
+    background: #BF5700 ; /* For browsers that do not support gradients */    
+    background: -webkit-linear-gradient(left, #ffba66, #BF5700 ); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right,  #ffba66, #BF5700 ); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #ffba66, #BF5700 ); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #ffba66, #BF5700 ); /* Standard syntax (must be last) */
+}
+ 
+   body{
+    margin: 0 0 0 0;
+    padding:0 0 0 0;
+   }
+</style>   
+<script>
+ function showRSS() {
+
+  var str=document.getElementById("in_").value;
+  
+  alert(str);
+
+  if (str.length==0) { 
+    document.getElementById("rssOutput").innerHTML="";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("rssOutput").innerHTML=xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("GET","getrss.php?q="+str,true);
+  xmlhttp.send();
+}
+
+</script>  
+</head>
+<body style="background:#F0F0F0!important;">
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="background:#FFFFFF!important;border:none!important;">
+        <div class="container-fluid" style="background:#FFFFFF!important;border:none!important;">
+           <div id="navbar"  style="background:#FFFFFF!important;border:none!important;">
+           <h1>RssQuery Get News</h1>
+          </div>
+          <span class="nav collapse navbar-collapse navbar-right" >        
+             <ul class="nav navbar-nav navbar-right" style="vertical-align:top!important;">
+               <li ><a href="#demo"><h3>Demo</h3></a></li>                   
+               <li ><a href="#news"><h3>News</h3></a></li>
+                 </span>
+</div>
+	</div>
+</nav>
+ <div class="jumbotron" style="margin-top:-35px!important;margin-bottom:0px!important;">  
+<div class="container-fluid" >
+<div id="demo" class="row">
+<h1 align="center">Demo</h1>
+
+<div align="center" class="col-md-12">
+<h3 align="center">RssQuery Get News</h3>
+<div style="margin-left:15px!important;" class="form-group">
+  <label for="usr">Enter a Topic to Search for:</label>
+  <table>
+  <tr>
+  <td> &nbsp; </td>
+  <td> <input type="text" class="form-control"  id="in_"></td>
+  <td> &nbsp; </td>
+  <td><button type="button" onclick="showRSS()" ondblclick="showRSS()" class="btn btn-warning">Get Tweets</button></td> </tr>
+  </table>
+<p>&nbsp;</p>
+</div>
+</div>
+</div>
+
+<div id="news" class="row">
+<div  class="col-md-12">
+<p>&nbsp;</p>
+<div align="left" style="margin-left:20px!important;"  id="rssOutput">Tweets will be listed here...</div>
+<p>&nbsp;</p>
+</div>
+</div>
+
+</div></div>
+ 
+
+<div id="bottom" class="container-fluid" style="background:white!important;color:#BF5700 !important;border-top:thin gray solid;margin-top:0px!important;margin-bottom:-100px!important;">
+<div class="row">
+<div class="col-md-4" align="center">
+<div class="input-group input-group-lg" width="30%" align="center">
+<p>&nbsp;</p>
+<h4 align="center">Tweet Your Topic NOW!</h4></br>
+<button align="center" type="button" class="btn btn-warning" onclick="redir()" ondblclick="redir()"> JOIN </button>
+</div>
+</div>
+
+	<div class="col-md-4">
+	<div align="center">
+		<p>&nbsp;</p>
+	<table align="center">
+<tr><td> <a href="http://www.twitter.com/gorossella"><img class="img-responsive"   height="30" width="30" src="images/twitter.jpg" /></a></td>
+<td> <a href="http://www.facebook.com/spendcast"><img class="img-responsive"  height="30" width="30" src="images/facebook.jpg" /></a></td>
+<td> <a href="http://www.instagram.com/gorossella"><img class="img-responsive"  height="30" width="30" src="images/instagram.jpg" /></a></td>
+</table>
+</br>
+<div align="center">
+<img class="img-responsive" src="images/Rossella-Logo.png" width="100" />
+</div>
+</div>
+</div>
+
+	<div class="col-md-4">
+        <table align="right" style="text-align:left">
+	      <tr>
+	      <td >
+	      <h3 >Rossella</h3>      
+	      </td></tr>
+	      </table>
+	   </div>
+</div>
+
+	<p>&nbsp;</p>
+<h4 align="center">MIT License</h4>
+
+</div>
+</div>
+
+
+	   
+
+       <!-- Bootstrap core JavaScript
+      ================================================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="bootstrap-3.3.1/js/tests/vendor/jquery.min.js"></script>
+    <script src="bootstrap-3.3.1/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap-3.3.1/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
