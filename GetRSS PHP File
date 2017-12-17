@@ -1,0 +1,61 @@
+<?php
+
+include 'source.php';
+
+//get the q parameter from URL
+$q=$_GET["q"];
+
+$x=0;
+
+$xml="https://news.google.com/news/feeds?pz=1&ned=us&cf=all&hl=en&q=".$q."&output=rss";
+
+$xmlDoc = new DOMDocument();
+$xmlDoc->load($xml);
+
+//get elements from "<channel>"
+$channel=$xmlDoc->getElementsByTagName('channel')->item(0);
+$channel_title = $channel->getElementsByTagName('title')
+->item(0)->childNodes->item(0)->nodeValue;
+$channel_link = $channel->getElementsByTagName('link')
+->item(0)->childNodes->item(0)->nodeValue;
+$channel_desc = $channel->getElementsByTagName('description')
+->item(0)->childNodes->item(0)->nodeValue;
+
+//output elements from "<channel>"
+
+//echo $channel_title."</br>";
+
+//get and output "<item>" elements
+$x=$xmlDoc->getElementsByTagName('item');
+for ($i=0; $i<=5; $i++) {
+ if($item_title=$x->item($i)){
+  $item_title=$x->item($i)->getElementsByTagName('title')
+  ->item(0)->childNodes->item(0)->nodeValue;
+  $item_link=$x->item($i)->getElementsByTagName('link')
+  ->item(0)->childNodes->item(0)->nodeValue;
+
+
+$long=strlen($item_title);
+$loc=strripos($item_title," - ");
+
+$loc++;
+$loc++;
+$item_source=substr($item_title,$loc);
+$item_source=source($item_source);
+
+
+if($item_source!="")
+  $item_source="via ".$item_source;
+
+$loc--;
+$loc--;
+$item_title=substr($item_title,0,$loc);
+
+
+$loc=strpos($item_link,"&url=");
+$loc=$loc+5;
+$item_link=substr($item_link,$loc);
+echo $item_title."  ".$item_link." ".$item_source."</br></br>";
+
+
+?>
